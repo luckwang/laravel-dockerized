@@ -10,7 +10,7 @@ RUN echo "deb http://nginx.org/packages/debian/ stretch nginx \n\
     && apt-get install -y --no-install-recommends nginx
 
 RUN pecl install xdebug-2.6.1 && docker-php-ext-enable xdebug \
-    && docker-php-ext-install pdo pdo_mysql zip
+    && docker-php-ext-install pdo_mysql zip
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && composer config -g repo.packagist composer https://packagist.laravel-china.org \
