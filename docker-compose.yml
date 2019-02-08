@@ -30,6 +30,7 @@ services:
       - mysqldata:/var/lib/mysql
     networks:
       - sdnet
+    restart: always
 
   cache:
     image: redis:5-alpine
@@ -37,6 +38,7 @@ services:
       - redisdata:/data
     networks:
       - sdnet
+    restart: always
 
 networks:
   sdnet:
