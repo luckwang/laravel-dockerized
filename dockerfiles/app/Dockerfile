@@ -1,13 +1,14 @@
 FROM php:7.2-fpm
 
-RUN echo "deb http://nginx.org/packages/debian/ stretch nginx \n\
-    deb-src http://nginx.org/packages/debian/ stretch nginx" \
-    > /etc/apt/sources.list.d/nginx.list \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends git supervisor sqlite3 gpg zip unzip zlib1g-dev \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gpg \
     && curl -fsSl http://nginx.org/keys/nginx_signing.key | apt-key add \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends nginx
+    && echo "deb http://nginx.org/packages/debian/ stretch nginx \n\
+    deb-src http://nginx.org/packages/debian/ stretch nginx" \
+    > /etc/apt/sources.list.d/nginx.list
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends --no-install-suggests nginx git supervisor sqlite3 zip unzip zlib1g-dev
 
 RUN pecl install xdebug-2.6.1 && docker-php-ext-enable xdebug \
     && docker-php-ext-install pdo_mysql zip
