@@ -11,7 +11,7 @@ services:
     ports:
       - 80:80
     environment:
-      XDEBUG_CONFIG: 'remote_enable=on idekey=PHPSTORM remote_host=127.0.0.1 remote_port=9000'
+      XDEBUG_CONFIG: 'remote_enable=on'
     networks:
       - sdnet
     restart: always

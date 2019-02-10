@@ -3,15 +3,14 @@ FROM php:7.2-fpm
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gpg \
     && curl -fsSl http://nginx.org/keys/nginx_signing.key | apt-key add \
-    && echo "deb http://nginx.org/packages/debian/ stretch nginx \n\
-    deb-src http://nginx.org/packages/debian/ stretch nginx" \
-    > /etc/apt/sources.list.d/nginx.list
+    && echo "deb http://nginx.org/packages/debian/ stretch nginx" > /etc/apt/sources.list.d/nginx.list \
+    && echo "deb-src http://nginx.org/packages/debian/ stretch nginx" >> /etc/apt/sources.list.d/nginx.list
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests nginx git supervisor sqlite3 zip unzip zlib1g-dev
 
 RUN pecl install xdebug-2.6.1 && docker-php-ext-enable xdebug \
-    && docker-php-ext-install pdo_mysql zip
+    && docker-php-ext-install pdo_mysql opcache zip
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && composer config -g repo.packagist composer https://packagist.laravel-china.org \
