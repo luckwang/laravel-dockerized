@@ -33,7 +33,7 @@ services:
     restart: always
 
   cache:
-    image: redis:5-alpine
+    image: redis:5.0
     volumes:
       - redisdata:/data
     networks:
